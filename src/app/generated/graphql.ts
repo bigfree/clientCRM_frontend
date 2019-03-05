@@ -110,3 +110,204 @@ export namespace AllClients {
 		description: Maybe<string>;
 	};
 }
+
+// ====================================================
+// Scalars
+// ====================================================
+
+// ====================================================
+// Interfaces
+// ====================================================
+
+export interface ResponseMutation {
+	code?: Maybe<string>;
+
+	ok: boolean;
+
+	message: string;
+}
+
+// ====================================================
+// Types
+// ====================================================
+
+export interface Query {
+	_empty?: Maybe<string>;
+
+	client: Client;
+
+	clients: (Maybe<Client>)[];
+
+	task?: Maybe<Task>;
+
+	tasks?: Maybe<(Maybe<Task>)[]>;
+
+	user: User;
+
+	users: (Maybe<User>)[];
+}
+
+export interface Client {
+	id: string;
+
+	name: string;
+
+	description?: Maybe<string>;
+
+	emails?: Maybe<(Maybe<ClientEmails>)[]>;
+
+	phones?: Maybe<(Maybe<ClientPhones>)[]>;
+
+	created_at?: Maybe<DateTime>;
+
+	deleted_at?: Maybe<DateTime>;
+
+	tasks?: Maybe<(Maybe<Task>)[]>;
+}
+
+export interface ClientEmails {
+	id: string;
+
+	email?: Maybe<string>;
+
+	comment?: Maybe<string>;
+}
+
+export interface ClientPhones {
+	id: string;
+
+	phone?: Maybe<string>;
+
+	comment?: Maybe<string>;
+}
+
+export interface Task {
+	id: string;
+
+	name: string;
+
+	description?: Maybe<string>;
+
+	completed?: Maybe<boolean>;
+
+	archive?: Maybe<boolean>;
+
+	created_at?: Maybe<DateTime>;
+
+	deleted_at?: Maybe<DateTime>;
+
+	client?: Maybe<Client>;
+}
+
+export interface User {
+	id?: Maybe<string>;
+
+	name?: Maybe<string>;
+
+	email?: Maybe<string>;
+
+	password?: Maybe<string>;
+}
+
+export interface Mutation {
+	_empty?: Maybe<string>;
+
+	addClient: ClientResponseMutation;
+
+	updateClient: ClientResponseMutation;
+
+	deleteClient: ClientResponseMutation;
+
+	addTask: TaskResponseMutation;
+
+	updateTask: TaskResponseMutation;
+
+	deleteTask: TaskResponseMutation;
+
+	addUser: UserResponseMutation;
+
+	updateUser: UserResponseMutation;
+
+	deleteUser: UserResponseMutation;
+}
+
+export interface ClientResponseMutation extends ResponseMutation {
+	code?: Maybe<string>;
+
+	ok: boolean;
+
+	message: string;
+
+	client?: Maybe<Client>;
+}
+
+export interface TaskResponseMutation extends ResponseMutation {
+	code?: Maybe<string>;
+
+	ok: boolean;
+
+	message: string;
+
+	task?: Maybe<Task>;
+}
+
+export interface UserResponseMutation extends ResponseMutation {
+	code?: Maybe<string>;
+
+	ok: boolean;
+
+	message: string;
+
+	user?: Maybe<User>;
+}
+
+export interface Subscription {
+	_empty?: Maybe<string>;
+}
+
+// ====================================================
+// Arguments
+// ====================================================
+
+export interface ClientQueryArgs {
+	id: string;
+}
+export interface TaskQueryArgs {
+	id: string;
+}
+export interface UserQueryArgs {
+	id: string;
+}
+export interface AddClientMutationArgs {
+	input: ClientInput;
+}
+export interface UpdateClientMutationArgs {
+	id: string;
+
+	input: ClientInput;
+}
+export interface DeleteClientMutationArgs {
+	id: string;
+}
+export interface AddTaskMutationArgs {
+	input: TaskInput;
+}
+export interface UpdateTaskMutationArgs {
+	id: string;
+
+	input: TaskInput;
+}
+export interface DeleteTaskMutationArgs {
+	id: string;
+}
+export interface AddUserMutationArgs {
+	input: UserInput;
+}
+export interface UpdateUserMutationArgs {
+	id: string;
+
+	input: UserInput;
+}
+export interface DeleteUserMutationArgs {
+	id: string;
+}

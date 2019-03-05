@@ -3282,13 +3282,6 @@ graphql-codegen-typescript-common@0.18.0, graphql-codegen-typescript-common@^0.1
     graphql-codegen-core "0.18.0"
     graphql-codegen-plugin-helpers "0.18.0"
 
-graphql-codegen-typescript-server@^0.18.0:
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/graphql-codegen-typescript-server/-/graphql-codegen-typescript-server-0.18.0.tgz#ede34059b416c46c26f353ced26089924ccf8b75"
-  integrity sha512-pKVEjmqrNdp87wQ5gUGykFcPy6jUZdYRABNBFswCMF7jhDup0RVbG5Lcpa7FkIqNEpEca9vlY+0m2nem7jIDEQ==
-  dependencies:
-    graphql-codegen-typescript-common "0.18.0"
-
 graphql-config@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/graphql-config/-/graphql-config-2.2.1.tgz#5fd0ec77ac7428ca5fb2026cf131be10151a0cb2"

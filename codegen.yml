@@ -10,3 +10,4 @@ generates:
       - typescript-apollo-angular
       - typescript-common
       - typescript-client
+      - typescript-server
