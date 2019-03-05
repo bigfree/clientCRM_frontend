@@ -1,0 +1,7 @@
+.client-list {
+	display: flex; flex-flow: column; width: 100%;
+
+	.client-list__item {
+		padding: 10px 15px; border: 1px solid #dedede; margin-bottom: -1px;
+	}
+}

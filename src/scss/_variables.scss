@@ -1,0 +1,27 @@
+// Fonts
+$font-stack:
+	// Safari for OS X and iOS (San Francisco)
+	-apple-system,
+	// Chrome < 56 for OS X (San Francisco)
+	BlinkMacSystemFont,
+	// Windows
+	"Segoe UI",
+	// Android
+	"Roboto",
+	// Basic web fallback
+	"Helvetica Neue", Arial, sans-serif,
+	// Emoji fonts
+	"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+
+// Colors
+$base-color: #272628;
+$background: #f8f8f8;
+
+$gray-1: #ededed;
+
+$border-color: #f8f8f8;
+
+// Blue color
+$blue-color: #179BFF;
+$blue-color2: #2CA4FF;
