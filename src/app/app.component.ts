@@ -1,24 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-const ClientsQuery = gql`
-	query clients {
-		getClients {
-			id
-			name
-			description
-			emails {
-				id
-				email
-			}
-			created_at
-		}
-	}
-`;
-type Response = {
-	getClients: any;
-}
+import { AllClientsGQL, ClientInput } from "./generated/graphql";
 
 @Component({
 	selector: 'app-root',
@@ -26,17 +10,29 @@ type Response = {
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-	title = 'frontend';
 
-	public clients: any;
+	clients: Observable<ClientInput[]>;
 
-	constructor(private apollo: Apollo) {}
+	constructor(private allClientsGQL: AllClientsGQL) {}
 
 	ngOnInit() {
 
-		this.apollo.watchQuery<Response>({query: ClientsQuery}).valueChanges.subscribe((res) => {
-			console.log(res.data.getClients);
-		});
+		this.clients = this.allClientsGQL.watch().valueChanges.pipe(
+			map(res => res.data.clients)
+		);
+
+		// this.allClientsGQL.watch().valueChanges.subscribe((res) => {
+		// 	this.clients = res.data.clients;
+		// });
+
+		// this.getClientsGQL.watch().valueChanges.subscribe(({data}) => {
+		// 	this.clients = data.getClients;
+		// });
+		// console.log(this.clients);
+
+		// this.apollo.watchQuery<Response>({query: ClientsQuery}).valueChanges.subscribe((res) => {
+		// 	console.log(res.data.getClients);
+		// });
 
 		// this.data = this.apollo.watchQuery({query: ClientsQuery}).valueChanges.pipe(map((res) => {
 		// 	console.log(res);

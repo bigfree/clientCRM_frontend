@@ -1,1 +1,10 @@
+<h1>Feed</h1>
+<ul>
+	<li *ngFor="let client of (clients | async)">
+		{{ client.id }} - {{ client.name }}
+		<p>{{ client.description }}</p>
+		<hr>
+	</li>
+</ul>
+
 <router-outlet></router-outlet>
