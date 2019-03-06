@@ -28,6 +28,21 @@ export class AllClientsGQL extends Apollo.Query<
 		}
 	`;
 }
+@Injectable({
+	providedIn: "root"
+})
+export class NewClientGQL extends Apollo.Subscription<
+	NewClient.Subscription,
+	NewClient.Variables
+> {
+	document: any = gql`
+		subscription NewClient {
+			clientAdded {
+				name
+			}
+		}
+	`;
+}
 
 // ====================================================
 // END: Apollo Angular template
@@ -108,6 +123,22 @@ export namespace AllClients {
 		name: string;
 
 		description: Maybe<string>;
+	};
+}
+
+export namespace NewClient {
+	export type Variables = {};
+
+	export type Subscription = {
+		__typename?: "Subscription";
+
+		clientAdded: Maybe<ClientAdded>;
+	};
+
+	export type ClientAdded = {
+		__typename?: "Client";
+
+		name: string;
 	};
 }
 
@@ -263,6 +294,8 @@ export interface UserResponseMutation extends ResponseMutation {
 
 export interface Subscription {
 	_empty?: Maybe<string>;
+
+	clientAdded?: Maybe<Client>;
 }
 
 // ====================================================

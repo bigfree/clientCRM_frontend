@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AllClientsGQL, Client } from '../generated/graphql';
+import { NewClientGQL } from "../generated/graphql";
 
 @Component({
   selector: 'app-clients',
@@ -12,8 +13,13 @@ import { AllClientsGQL, Client } from '../generated/graphql';
 export class ClientsComponent implements OnInit {
 
 	clients: Observable<Client[]>;
+	lastClient;
 
-	constructor(private allClientsGQL: AllClientsGQL) {}
+	constructor(private allClientsGQL: AllClientsGQL, newClientGQL: NewClientGQL) {
+		this.lastClient = newClientGQL.subscribe();
+
+		console.log(this.lastClient);
+	}
 
 	ngOnInit() {
 		this.clients = this.allClientsGQL.watch().valueChanges.pipe(
