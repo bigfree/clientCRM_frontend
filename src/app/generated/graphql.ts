@@ -264,7 +264,7 @@ export interface Client {
 }
 
 export interface ClientEmails {
-	id: string;
+	id?: Maybe<string>;
 
 	email?: Maybe<string>;
 
@@ -272,7 +272,7 @@ export interface ClientEmails {
 }
 
 export interface ClientPhones {
-	id: string;
+	id?: Maybe<string>;
 
 	phone?: Maybe<string>;
 
