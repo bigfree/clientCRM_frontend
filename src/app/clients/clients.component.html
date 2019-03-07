@@ -1,4 +1,5 @@
 <h1 class="section-title">Feed</h1>
+{{ array }}
 <nav class="client-list">
 	<a *ngFor="let client of (clients | async)" [routerLink]="['/client', client.id]" class="client-list__item">
 		{{ client.name }}

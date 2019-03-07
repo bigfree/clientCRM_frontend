@@ -1,3 +1,8 @@
-<p>
-  client-detail works!
-</p>
+<h1 *ngIf="client">{{ client!.name }}</h1>
+<code>
+	<pre>
+{{ client | json }}
+	</pre>
+</code>
+
+<a [routerLink]="['/clients']"><= Back</a>

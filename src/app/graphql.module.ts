@@ -7,7 +7,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 
 const uriHttp = 'http://localhost:8000/graphql';
-const uriWS = 'ws://localhost:8000/subscriptions';
+const uriWS = 'ws://localhost:8000/graphql';
 
 export function createApollo(httpLink: HttpLink) {
 
@@ -25,6 +25,7 @@ export function createApollo(httpLink: HttpLink) {
 	const link = split(
 		({ query }) => {
 			const { kind, operation } = getMainDefinition(query);
+			console.log({ query, kind, operation });
 			return kind === 'OperationDefinition' && operation === 'subscription';
 		},
 		ws,

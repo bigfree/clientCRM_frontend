@@ -43,6 +43,31 @@ export class NewClientGQL extends Apollo.Subscription<
 		}
 	`;
 }
+@Injectable({
+	providedIn: "root"
+})
+export class GetClientGQL extends Apollo.Query<
+	GetClient.Query,
+	GetClient.Variables
+> {
+	document: any = gql`
+		query GetClient($id: ID!) {
+			client(id: $id) {
+				name
+				description
+				created_at
+				emails {
+					email
+					comment
+				}
+				phones {
+					phone
+					comment
+				}
+			}
+		}
+	`;
+}
 
 // ====================================================
 // END: Apollo Angular template
@@ -118,9 +143,9 @@ export namespace AllClients {
 	export type Clients = {
 		__typename?: "Client";
 
-		id: string;
+		id: Maybe<string>;
 
-		name: string;
+		name: Maybe<string>;
 
 		description: Maybe<string>;
 	};
@@ -138,7 +163,49 @@ export namespace NewClient {
 	export type ClientAdded = {
 		__typename?: "Client";
 
-		name: string;
+		name: Maybe<string>;
+	};
+}
+
+export namespace GetClient {
+	export type Variables = {
+		id: string;
+	};
+
+	export type Query = {
+		__typename?: "Query";
+
+		client: Client;
+	};
+
+	export type Client = {
+		__typename?: "Client";
+
+		name: Maybe<string>;
+
+		description: Maybe<string>;
+
+		created_at: Maybe<DateTime>;
+
+		emails: Maybe<(Maybe<Emails>)[]>;
+
+		phones: Maybe<(Maybe<Phones>)[]>;
+	};
+
+	export type Emails = {
+		__typename?: "ClientEmails";
+
+		email: Maybe<string>;
+
+		comment: Maybe<string>;
+	};
+
+	export type Phones = {
+		__typename?: "ClientPhones";
+
+		phone: Maybe<string>;
+
+		comment: Maybe<string>;
 	};
 }
 
@@ -179,9 +246,9 @@ export interface Query {
 }
 
 export interface Client {
-	id: string;
+	id?: Maybe<string>;
 
-	name: string;
+	name?: Maybe<string>;
 
 	description?: Maybe<string>;
 
