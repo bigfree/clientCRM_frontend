@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { AppAsideComponent } from './app-aside/app-aside.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
+import { ClientAddComponent } from './clients/client-add/client-add.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +18,15 @@ import { ClientDetailComponent } from './clients/client-detail/client-detail.com
 	ClientsComponent,
 	AppAsideComponent,
 	AppHeaderComponent,
-	ClientDetailComponent
+	ClientDetailComponent,
+	ClientAddComponent
   ],
   imports: [
 	BrowserModule,
 	AppRoutingModule,
 	GraphQLModule,
-	HttpClientModule
+	HttpClientModule,
+	ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -14,6 +14,22 @@ import gql from "graphql-tag";
 @Injectable({
 	providedIn: "root"
 })
+export class AddClientGQL extends Apollo.Mutation<
+	AddClient.Mutation,
+	AddClient.Variables
+> {
+	document: any = gql`
+		mutation AddClient($input: ClientInput!) {
+			addClient(input: $input) {
+				ok
+				message
+			}
+		}
+	`;
+}
+@Injectable({
+	providedIn: "root"
+})
 export class AllClientsGQL extends Apollo.Query<
 	AllClients.Query,
 	AllClients.Variables
@@ -130,6 +146,26 @@ export type Upload = any;
 // ====================================================
 // Documents
 // ====================================================
+
+export namespace AddClient {
+	export type Variables = {
+		input: ClientInput;
+	};
+
+	export type Mutation = {
+		__typename?: "Mutation";
+
+		addClient: AddClient;
+	};
+
+	export type AddClient = {
+		__typename?: "ClientResponseMutation";
+
+		ok: boolean;
+
+		message: string;
+	};
+}
 
 export namespace AllClients {
 	export type Variables = {};

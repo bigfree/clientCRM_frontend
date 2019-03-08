@@ -1,0 +1,20 @@
+<h1>New client</h1>
+
+{{ message }}
+
+<form [formGroup]="addClientForm" (ngSubmit)="onSubmit()">
+
+	<label>
+		Name: <br>
+		<input type="text" formControlName="name" required>
+	</label>
+<br>
+	<label>
+		Description: <br>
+		<textarea rows="5" cols="50" formControlName="description"></textarea>
+	</label>
+	<br>
+	<button type="submit" [disabled]="!addClientForm.valid">Ulozit</button>
+</form>
+<br>
+<a routerLink="/clients"><= Back</a>

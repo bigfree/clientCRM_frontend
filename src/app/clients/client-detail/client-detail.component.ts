@@ -15,11 +15,11 @@ export class ClientDetailComponent implements OnInit {
 	private taskID: any;
 
 	// public clientObservable: Observable<Client>;
-	public client: Client;
+	public client: Observable<Client>;
+	public clientJSON: Client;
 
 	constructor(
 		private route: ActivatedRoute,
-		private router: Router,
 		private getClientGQL: GetClientGQL
 	) { }
 
@@ -28,9 +28,13 @@ export class ClientDetailComponent implements OnInit {
 			this.taskID = params.id;
 		});
 
-		this.getClientGQL.fetch({ id: this.taskID }).subscribe(({ data }) => {
-			this.client = data.client;
-		});
+		this.client = this.getClientGQL.fetch({ id: this.taskID }).pipe(
+			map(({ data }) => data.client)
+		);
+
+		this.client.subscribe(res => {
+			this.clientJSON = res;
+		})
 	}
 
 	// getClientInfo(): Observable<Client> {
