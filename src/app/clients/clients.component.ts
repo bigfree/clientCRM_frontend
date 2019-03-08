@@ -6,23 +6,23 @@ import { AllClientsGQL, Client } from '../generated/graphql';
 import { NewClientGQL, } from '../generated/graphql';
 
 import { Apollo, QueryRef } from 'apollo-angular';
-import gql from 'graphql-tag';
+import { ClientItem, ClientSubscription } from "../gql/clients.subscription";
 
-const subscription = gql`
-	subscription NewClient {
-		clientAdded {
-			id
-			name
-			description
-		}
-	}
-`;
+// const subscription = gql`
+// 	subscription NewClient {
+// 		clientAdded {
+// 			id
+// 			name
+// 			description
+// 		}
+// 	}
+// `;
 
-interface ClientItem {
-	id: string;
-	name: string;
-	description: string;
-};
+// interface ClientItem {
+// 	id: string;
+// 	name: string;
+// 	description: string;
+// };
 
 @Component({
   selector: 'app-clients',
@@ -68,7 +68,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
 		// this.clientTestSub = this.newClientGQL.;
 
 		this.clientQuery.subscribeToMore({
-			document: subscription,
+			document: ClientSubscription,
 			updateQuery: (prev, { subscriptionData }) => {
 				if (!subscriptionData.data) return prev;
 
