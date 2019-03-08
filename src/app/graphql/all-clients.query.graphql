@@ -1,7 +1,11 @@
+fragment ClientParts on Client {
+	id
+	name
+	description
+}
+
 query AllClients {
 	clients {
-		id
-		name
-		description
+		...ClientParts
 	}
 }

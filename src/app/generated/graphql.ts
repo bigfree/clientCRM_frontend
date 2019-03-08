@@ -8,6 +8,18 @@ import * as Apollo from "apollo-angular";
 import gql from "graphql-tag";
 
 // ====================================================
+// GraphQL Fragments
+// ====================================================
+
+export const ClientPartsFragment = gql`
+	fragment ClientParts on Client {
+		id
+		name
+		description
+	}
+`;
+
+// ====================================================
 // Apollo Services
 // ====================================================
 
@@ -23,8 +35,13 @@ export class AddClientGQL extends Apollo.Mutation<
 			addClient(input: $input) {
 				ok
 				message
+				client {
+					...ClientParts
+				}
 			}
 		}
+
+		${ClientPartsFragment}
 	`;
 }
 @Injectable({
@@ -37,11 +54,11 @@ export class AllClientsGQL extends Apollo.Query<
 	document: any = gql`
 		query AllClients {
 			clients {
-				id
-				name
-				description
+				...ClientParts
 			}
 		}
+
+		${ClientPartsFragment}
 	`;
 }
 @Injectable({
@@ -164,7 +181,11 @@ export namespace AddClient {
 		ok: boolean;
 
 		message: string;
+
+		client: Maybe<Client>;
 	};
+
+	export type Client = ClientParts.Fragment;
 }
 
 export namespace AllClients {
@@ -176,15 +197,7 @@ export namespace AllClients {
 		clients: (Maybe<Clients>)[];
 	};
 
-	export type Clients = {
-		__typename?: "Client";
-
-		id: Maybe<string>;
-
-		name: Maybe<string>;
-
-		description: Maybe<string>;
-	};
+	export type Clients = ClientParts.Fragment;
 }
 
 export namespace NewClient {
@@ -242,6 +255,18 @@ export namespace GetClient {
 		phone: Maybe<string>;
 
 		comment: Maybe<string>;
+	};
+}
+
+export namespace ClientParts {
+	export type Fragment = {
+		__typename?: "Client";
+
+		id: Maybe<string>;
+
+		name: Maybe<string>;
+
+		description: Maybe<string>;
 	};
 }
 
