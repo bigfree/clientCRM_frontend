@@ -1,111 +1,3 @@
-// ====================================================
-// START: Apollo Angular template
-// ====================================================
-
-import { Injectable } from "@angular/core";
-import * as Apollo from "apollo-angular";
-
-import gql from "graphql-tag";
-
-// ====================================================
-// GraphQL Fragments
-// ====================================================
-
-export const ClientPartsFragment = gql`
-	fragment ClientParts on Client {
-		id
-		name
-		description
-	}
-`;
-
-// ====================================================
-// Apollo Services
-// ====================================================
-
-@Injectable({
-	providedIn: "root"
-})
-export class AddClientGQL extends Apollo.Mutation<
-	AddClient.Mutation,
-	AddClient.Variables
-> {
-	document: any = gql`
-		mutation AddClient($input: ClientInput!) {
-			addClient(input: $input) {
-				ok
-				message
-				client {
-					...ClientParts
-				}
-			}
-		}
-
-		${ClientPartsFragment}
-	`;
-}
-@Injectable({
-	providedIn: "root"
-})
-export class AllClientsGQL extends Apollo.Query<
-	AllClients.Query,
-	AllClients.Variables
-> {
-	document: any = gql`
-		query AllClients {
-			clients {
-				...ClientParts
-			}
-		}
-
-		${ClientPartsFragment}
-	`;
-}
-@Injectable({
-	providedIn: "root"
-})
-export class NewClientGQL extends Apollo.Subscription<
-	NewClient.Subscription,
-	NewClient.Variables
-> {
-	document: any = gql`
-		subscription NewClient {
-			clientAdded {
-				name
-			}
-		}
-	`;
-}
-@Injectable({
-	providedIn: "root"
-})
-export class GetClientGQL extends Apollo.Query<
-	GetClient.Query,
-	GetClient.Variables
-> {
-	document: any = gql`
-		query GetClient($id: ID!) {
-			client(id: $id) {
-				name
-				description
-				created_at
-				emails {
-					email
-					comment
-				}
-				phones {
-					phone
-					comment
-				}
-			}
-		}
-	`;
-}
-
-// ====================================================
-// END: Apollo Angular template
-// ====================================================
-
 export type Maybe<T> = T | null;
 
 export interface ClientInput {
@@ -164,111 +56,95 @@ export type Upload = any;
 // Documents
 // ====================================================
 
-export namespace AddClient {
-	export type Variables = {
-		input: ClientInput;
-	};
+export type AddClientVariables = {
+	input: ClientInput;
+};
 
-	export type Mutation = {
-		__typename?: "Mutation";
+export type AddClientMutation = {
+	__typename?: "Mutation";
 
-		addClient: AddClient;
-	};
+	addClient: AddClientAddClient;
+};
 
-	export type AddClient = {
-		__typename?: "ClientResponseMutation";
+export type AddClientAddClient = {
+	__typename?: "ClientResponseMutation";
 
-		ok: boolean;
+	ok: boolean;
 
-		message: string;
+	message: string;
 
-		client: Maybe<Client>;
-	};
+	client: Maybe<AddClientClient>;
+};
 
-	export type Client = ClientParts.Fragment;
-}
+export type AddClientClient = ClientPartsFragment;
 
-export namespace AllClients {
-	export type Variables = {};
+export type AllClientsVariables = {};
 
-	export type Query = {
-		__typename?: "Query";
+export type AllClientsQuery = {
+	__typename?: "Query";
 
-		clients: (Maybe<Clients>)[];
-	};
+	clients: (Maybe<AllClientsClients>)[];
+};
 
-	export type Clients = ClientParts.Fragment;
-}
+export type AllClientsClients = ClientPartsFragment;
 
-export namespace NewClient {
-	export type Variables = {};
+export type NewClientVariables = {};
 
-	export type Subscription = {
-		__typename?: "Subscription";
+export type NewClientSubscription = {
+	__typename?: "Subscription";
 
-		clientAdded: Maybe<ClientAdded>;
-	};
+	clientAdded: Maybe<NewClientClientAdded>;
+};
 
-	export type ClientAdded = {
-		__typename?: "Client";
+export type NewClientClientAdded = ClientPartsFragment;
 
-		name: Maybe<string>;
-	};
-}
+export type GetClientVariables = {
+	id: string;
+};
 
-export namespace GetClient {
-	export type Variables = {
-		id: string;
-	};
+export type GetClientQuery = {
+	__typename?: "Query";
 
-	export type Query = {
-		__typename?: "Query";
+	client: GetClientClient;
+};
 
-		client: Client;
-	};
+export type GetClientClient = {
+	__typename?: "Client";
 
-	export type Client = {
-		__typename?: "Client";
+	name: Maybe<string>;
 
-		name: Maybe<string>;
+	description: Maybe<string>;
 
-		description: Maybe<string>;
+	created_at: Maybe<DateTime>;
 
-		created_at: Maybe<DateTime>;
+	emails: Maybe<(Maybe<GetClientEmails>)[]>;
 
-		emails: Maybe<(Maybe<Emails>)[]>;
+	phones: Maybe<(Maybe<GetClientPhones>)[]>;
+};
 
-		phones: Maybe<(Maybe<Phones>)[]>;
-	};
+export type GetClientEmails = {
+	__typename?: "ClientEmails";
 
-	export type Emails = {
-		__typename?: "ClientEmails";
+	email: Maybe<string>;
 
-		email: Maybe<string>;
+	comment: Maybe<string>;
+};
 
-		comment: Maybe<string>;
-	};
+export type GetClientPhones = {
+	__typename?: "ClientPhones";
 
-	export type Phones = {
-		__typename?: "ClientPhones";
+	phone: Maybe<string>;
 
-		phone: Maybe<string>;
+	comment: Maybe<string>;
+};
 
-		comment: Maybe<string>;
-	};
-}
+export type ClientPartsFragment = {
+	__typename?: "Client";
 
-export namespace ClientParts {
-	export type Fragment = {
-		__typename?: "Client";
+	id: Maybe<string>;
 
-		id: Maybe<string>;
-
-		name: Maybe<string>;
-
-		description: Maybe<string>;
-	};
-}
+	name: Maybe<string>;
+};
 
 // ====================================================
 // Scalars
@@ -472,3 +348,112 @@ export interface UpdateUserMutationArgs {
 export interface DeleteUserMutationArgs {
 	id: string;
 }
+
+// ====================================================
+// START: Apollo Angular template
+// ====================================================
+
+import { Injectable } from "@angular/core";
+import * as Apollo from "apollo-angular";
+
+import gql from "graphql-tag";
+
+// ====================================================
+// GraphQL Fragments
+// ====================================================
+
+export const ClientPartsFragment = gql`
+	fragment ClientParts on Client {
+		id
+		name
+	}
+`;
+
+// ====================================================
+// Apollo Services
+// ====================================================
+
+@Injectable({
+	providedIn: "root"
+})
+export class AddClientGQL extends Apollo.Mutation<
+	AddClientMutation,
+	AddClientVariables
+> {
+	document: any = gql`
+		mutation AddClient($input: ClientInput!) {
+			addClient(input: $input) {
+				ok
+				message
+				client {
+					...ClientParts
+				}
+			}
+		}
+
+		${ClientPartsFragment}
+	`;
+}
+@Injectable({
+	providedIn: "root"
+})
+export class AllClientsGQL extends Apollo.Query<
+	AllClientsQuery,
+	AllClientsVariables
+> {
+	document: any = gql`
+		query AllClients {
+			clients {
+				...ClientParts
+			}
+		}
+
+		${ClientPartsFragment}
+	`;
+}
+@Injectable({
+	providedIn: "root"
+})
+export class NewClientGQL extends Apollo.Subscription<
+	NewClientSubscription,
+	NewClientVariables
+> {
+	document: any = gql`
+		subscription NewClient {
+			clientAdded {
+				...ClientParts
+			}
+		}
+
+		${ClientPartsFragment}
+	`;
+}
+@Injectable({
+	providedIn: "root"
+})
+export class GetClientGQL extends Apollo.Query<
+	GetClientQuery,
+	GetClientVariables
+> {
+	document: any = gql`
+		query GetClient($id: ID!) {
+			client(id: $id) {
+				name
+				description
+				created_at
+				emails {
+					email
+					comment
+				}
+				phones {
+					phone
+					comment
+				}
+			}
+		}
+	`;
+}
+
+// ====================================================
+// END: Apollo Angular template
+// ====================================================

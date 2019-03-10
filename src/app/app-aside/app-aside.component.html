@@ -1,4 +1,10 @@
 <nav class="router-list">
-	<a routerLink="/" routerLinkActive="--active" class="router-list__link">Home</a>
-	<a routerLink="clients" routerLinkActive="--active" class="router-list__link">Clients</a>
+	<a routerLink="/" routerLinkActive="--active" [routerLinkActiveOptions]="{exact: true}" class="router-list__link">
+		<img src="/assets/ico/sharp-home-24px.svg" alt="" class="router-list__link-image">
+		<span class="router-list__link-name">Domov</span>
+	</a>
+	<a routerLink="clients" routerLinkActive="--active" [routerLinkActiveOptions]="{exact: true}" class="router-list__link">
+		<img src="/assets/ico/sharp-group-24px.svg" alt="" class="router-list__link-image">
+		<span class="router-list__link-name">Klienti</span>
+	</a>
 </nav>

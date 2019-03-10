@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +27,8 @@ import { ClientAddComponent } from './clients/client-add/client-add.component';
 	AppRoutingModule,
 	GraphQLModule,
 	HttpClientModule,
-	ReactiveFormsModule
+	ReactiveFormsModule,
+	NgbAlertModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -5,9 +5,9 @@ generates:
   ./src/app/generated/graphql.ts:
     config:
     #   noGraphqlTag: true
-    #   noNamespaces: true
+      noNamespaces: true
     plugins:
-      - typescript-apollo-angular
       - typescript-common
       - typescript-client
       - typescript-server
+      - typescript-apollo-angular

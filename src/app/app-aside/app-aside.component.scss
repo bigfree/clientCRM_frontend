@@ -1,3 +1,13 @@
 @import "../../scss/variables";
 
-:host { grid-column: 1; grid-row: 1 / span 2; background: $gray-1; }
+:host {
+	grid-column: 1; grid-row: 1 / span 2; box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, .07);
+
+	.router-list { display: flex; flex-flow: column; color: $base-color; }
+	.router-list__link { display: flex; flex-flow: column; align-items: center; justify-content: center; flex: 0 0 auto; width: 100%; color: inherit; border-bottom: 1px solid #f8f8f8; text-transform: uppercase; font-size: 13px; padding: 15px; }
+	.router-list__link:hover { background: #f8f8f8; text-decoration: none; }
+	.router-list__link-image { width: 100%; height: 32px; object-fit: contain; padding: 0 15px; opacity: .15; margin-bottom: 2px; transition: opacity 180ms; }
+
+	.router-list__link.--active { font-weight: 500; }
+	.router-list__link.--active .router-list__link-image { opacity: .35; }
+}
