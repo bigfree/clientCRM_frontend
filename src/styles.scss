@@ -3,4 +3,6 @@
 @import "scss/variables";
 @import "scss/bootstrap";
 
-html, body { width: 100vw; height: 100vh; }
+@import "scss/form";
+
+html, body { width: 100vw; height: 100vh; background: #fafafa; }

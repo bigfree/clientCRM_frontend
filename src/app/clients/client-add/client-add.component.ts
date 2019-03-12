@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { AddClientGQL, ClientResponseMutation } from "../../generated/graphql";
+import { DomService } from 'src/app/services/dom.service';
+
+import { EmailTemplateComponent } from '../email-template/email-template.component';
 
 @Component({
 	selector: 'app-client-add',
@@ -10,15 +13,31 @@ import { AddClientGQL, ClientResponseMutation } from "../../generated/graphql";
 })
 export class ClientAddComponent implements OnInit {
 
-	public message: String;
+	@ViewChild("emails") emails: TemplateRef<any>;
+
+	public response: ClientResponseMutation;
 	public addClientForm = this.fb.group({
 		name: ['', Validators.required],
 		description: [''],
+		company: [''],
+		street: [''],
+		city: [''],
+		psc: [''],
+		country: [''],
+		ico: [''],
+		dic: [''],
+		icdph: [''],
+		post_company: [''],
+		post_street: [''],
+		post_city: [''],
+		post_psc: [''],
+		post_country: ['']
 	});
 
 	constructor(
 		private addClientGQL: AddClientGQL,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private domService: DomService
 	) { }
 
 	ngOnInit() {
@@ -29,8 +48,14 @@ export class ClientAddComponent implements OnInit {
 		this.addClientGQL
 			.mutate({ input: this.addClientForm.value })
 			.subscribe(({data}) => {
-				this.message = data.addClient.message;
+				this.response = data.addClient;
 			});
+	}
+
+	public addComponent(component) {
+		const componentDOM = this.domService.getComponent(EmailTemplateComponent);
+
+		document.querySelector(".attach-list__email").append(componentDOM);
 	}
 
 }

@@ -1,19 +1,7 @@
-<h1 class="section-title">Feed</h1>
-
-<div>
-	<a routerLink="/client/new">Novy client</a>
-</div>
-<hr>
-<br>
+<a routerLink="/client/new" class="btn btn-secondary">Nový klient</a>
+<br><br>
 <nav class="client-list">
-	<a *ngFor="let client of clientItems" [routerLink]="['/client', client.id]" class="client-list__item">
-		{{ client.name }}
-	</a>
+	<div *ngFor="let client of clientItems" class="client-item">
+		<a [routerLink]="['/client', client.id]" class="client-item__link">{{ client.name }}</a>
+	</div>
 </nav>
-<!-- <ul>
-	<li *ngFor="let client of (clients | async)">
-		{{ client.id }} - {{ client.name }}
-		<p>{{ client.description }}</p>
-		<hr>
-	</li>
-</ul> -->

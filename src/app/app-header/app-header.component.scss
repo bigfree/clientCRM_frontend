@@ -1,3 +1,9 @@
 @import "../../scss/variables";
 
-:host { grid-row: 1; grid-column: 2 / span 2; background-image: linear-gradient(to left, $blue-color, $blue-color2); }
+:host {
+	grid-row: 1;
+	grid-column: 2;
+	background: #fff;
+	box-shadow: 0 0 15px 0 rgba(0, 0, 0, .15);
+	z-index: 99;
+}

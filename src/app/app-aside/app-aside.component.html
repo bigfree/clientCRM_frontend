@@ -1,10 +1,12 @@
 <nav class="router-list">
-	<a routerLink="/" routerLinkActive="--active" [routerLinkActiveOptions]="{exact: true}" class="router-list__link">
-		<img src="/assets/ico/sharp-home-24px.svg" alt="" class="router-list__link-image">
-		<span class="router-list__link-name">Domov</span>
+
+	<a routerLink="/" routerLinkActive="--active" class="router-link">
+		<fa-icon [icon]="faHome" class="router-link__image" size="x10"></fa-icon>
+		<span class="router-link__name">Dashboard</span>
 	</a>
-	<a routerLink="clients" routerLinkActive="--active" [routerLinkActiveOptions]="{exact: true}" class="router-list__link">
-		<img src="/assets/ico/sharp-group-24px.svg" alt="" class="router-list__link-image">
-		<span class="router-list__link-name">Klienti</span>
+	<a routerLink="clients" routerLinkActive="--active" class="router-link">
+		<fa-icon [icon]="faUser" class="router-link__image" size="x10"></fa-icon>
+		<span class="router-link__name">Clients</span>
 	</a>
+
 </nav>

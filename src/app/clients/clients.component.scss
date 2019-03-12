@@ -1,7 +1,31 @@
-.client-list {
-	display: flex; flex-flow: column; width: 100%;
+@import "../../scss/variables";
 
-	.client-list__item {
-		padding: 10px 15px; border: 1px solid #dedede; margin-bottom: -1px;
+.client-list {
+	display: flex;
+	flex-flow: column;
+	width: 100%;
+	background: #fff;
+}
+
+.client-item {
+	display: flex;
+	align-items: center;
+	height: 56px;
+	border: 1px solid #eeeeee;
+	margin-bottom: -1px;
+	color: $base-color;
+	transition: box-shadow 200ms;
+
+	&:hover {
+		box-shadow: 0 0 10px 0 rgba(0, 0, 0, .05);
+	}
+
+	.client-item__link {
+		display: flex;
+		align-items: center;
+		align-self: stretch;
+		flex: 1;
+		padding: 0 15px;
+		color: inherit;
 	}
 }
